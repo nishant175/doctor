@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Doctor;
 use App\Hospital;
+use DB;
+use Cache;
+use Config;
 
 class DoctorController extends Controller
 {
@@ -16,7 +19,15 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $doctors = Doctor::get();
+        //DB::connection()->enableQueryLog();
+        $doctors = Cache::remember('doctors', Config::get('constants.seconds.one_day'), function () {
+            return Doctor::get();
+        });
+
+        //$queries = DB::getQueryLog();
+
+        //\Log::info($queries);
+
         return view('admin.doctor.index', compact('doctors'));
     }
 
