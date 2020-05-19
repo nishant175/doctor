@@ -128,6 +128,7 @@ class DoctorController extends Controller
     }
     public function ca()
     {
+        echo "git testing";
 
    }       
 }
