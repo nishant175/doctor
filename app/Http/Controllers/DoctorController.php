@@ -126,4 +126,8 @@ class DoctorController extends Controller
         $doctor->delete();
         return redirect()->route('doctor.index');
     }
+    public function ca()
+    {
+
+   }       
 }
