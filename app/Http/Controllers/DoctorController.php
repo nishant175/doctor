@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Doctor;
 use App\Hospital;
+use App\Category;
 use DB;
 use Cache;
 use Config;
@@ -50,7 +51,8 @@ class DoctorController extends Controller
     public function create()
     {
         $hospitals = Hospital::get();
-        return view('admin.doctor.create', compact('hospitals'));
+        $categories = Category::get();
+        return view('admin.doctor.create', compact('hospitals', 'categories'));
     }
 
     /**
@@ -136,10 +138,5 @@ class DoctorController extends Controller
     {
         $doctor->delete();
         return redirect()->route('doctor.index');
-    }
-    public function ca()
-    {
-        echo "git testing";
-
-   }       
+    }      
 }

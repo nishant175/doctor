@@ -85,6 +85,9 @@
                                         <br><label class="error">{{ $message }}</label>
                                     @enderror
                                 </div>
+
+                                <h2>{{ old('speciality[]') }}</h2>
+
                                 <div class="form-group">
                                     <label>Speciality</label>
                                     <select name="speciality[]" multiple class="form-control">
@@ -103,15 +106,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Categories</label>
-                                    <select name="category" class="form-control">
-                                        <option >Neurology and Neurosurgery</option>
+                                    <select name="category_id" class="form-control">
+                                    @forelse($categories as $category)
+                                        <option @if( $category->id == old('category_id')) selected  @endif value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @empty
+
+                                    @endforelse
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Hospital</label>
                                     <select name="hospital_id" class="form-control">
                                     @forelse($hospitals as $hospital)
-                                        <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
+                                        <option @if( $hospital->id == old('hospital_id')) selected  @endif value="{{ $hospital->id }}">{{ $hospital->name }}</option>
                                     @empty
 
                                     @endforelse
@@ -119,27 +126,27 @@
                                 </div>
                                 <div class="form-group">
                                 <label>About Doctor</label>
-                                <textarea name="about" class="form-control" id="myeditor" rows="3"></textarea>
+                                <textarea name="about" class="form-control" id="myeditor" rows="3">{{ old('about') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Specializations</label>
                                 <!-- creating a text area for my editor in the form -->
-                                <textarea name="specialization" class="form-control" id="myeditor1" name="specialization"></textarea>
+                                <textarea name="specialization" class="form-control" id="myeditor1" name="specialization">{{ old('specialization') }}</textarea>
                             </div>
                         </div>
                         <!-- /.col-lg-6 (nested) -->
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>List Of Awards</label>
-                                <textarea name="list_of_awards" id="myeditor2" class="form-control" rows="3"></textarea>
+                                <textarea name="list_of_awards" id="myeditor2" class="form-control" rows="3">{{ old('list_of_awards') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Work Experience</label>
-                                <textarea name="work_experience" class="form-control" id="myeditor3" rows="3"></textarea>
+                                <textarea name="work_experience" class="form-control" id="myeditor3" rows="3">{{ old('work_experience') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Education & Training</label>
-                                <textarea name="education_training" class="form-control" id="myeditor4" rows="3"></textarea>
+                                <textarea name="education_training" class="form-control" id="myeditor4" rows="3">{{ old('education_training') }}</textarea>
                             </div>
                         </div>
                         <!-- /.col-lg-6 (nested) -->

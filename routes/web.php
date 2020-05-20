@@ -25,7 +25,5 @@ Route::middleware('auth')->prefix('admin')->group(function(){
 
 	Route::get('/doctor/trash', 'DoctorController@trash')->name('doctor.trash');
 
-	Route::resource('doctor', 'DoctorController')->names([
-	    //'index' => 'doctor.list'
-	]);
+	Route::resource('doctor', 'DoctorController');
 });

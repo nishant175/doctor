@@ -18,12 +18,14 @@ class CreateDoctorsTable extends Migration
             $table->foreignId('hospital_id')
               ->constrained()
               ->onDelete('cascade');
+            $table->foreignId('category_id')
+              ->constrained()
+              ->onDelete('cascade');
             $table->string('name');
             $table->string('designation');
             $table->string('experience');
             $table->string('qualification');
             $table->text('speciality');
-            $table->text('category');
             $table->text('about')->nullable();
             $table->text('specialization')->nullable();
             $table->text('list_of_awards')->nullable();
