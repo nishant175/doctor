@@ -10,6 +10,7 @@ use App\Category;
 use DB;
 use Cache;
 use Config;
+use Illuminate\Support\Carbon;
 
 class DoctorController extends Controller
 {
@@ -21,14 +22,15 @@ class DoctorController extends Controller
     public function index()
     {
         //DB::connection()->enableQueryLog();
-        $doctors = Cache::remember('doctors', Config::get('constants.seconds.one_day'), function () {
+        /*$doctors = Cache::remember('doctors', Config::get('constants.seconds.one_second'), function () {
             return Doctor::get();
-        });
+        });*/
 
         //$queries = DB::getQueryLog();
 
         //\Log::info($queries);
 
+        $doctors = Doctor::get();
         return view('admin.doctor.index', compact('doctors'));
     }
 
@@ -41,6 +43,16 @@ class DoctorController extends Controller
     {
         $doctors = Doctor::onlyTrashed()->get();
         return view('admin.doctor.index', compact('doctors'));
+    }
+
+    public function backToList(Request $request)
+    {
+        $id = $request->input('id');
+        DB::connection()->enableQueryLog();
+        Doctor::whereId($id)->restore();
+        $queries = DB::getQueryLog();
+        \Log::info($queries);
+        return redirect()->route('doctor.index');
     }
 
     /**
@@ -63,7 +75,6 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-
         $validateData = $request->validate([
             'name' => 'required|min:3|max:255',
             'slug' => 'required|unique:doctors',
@@ -111,9 +122,11 @@ class DoctorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Doctor $doctor)
     {
-        //
+        $hospitals = Hospital::get();
+        $categories = Category::get();
+        return view('admin.doctor.create', compact('doctor', 'hospitals', 'categories'));
     }
 
     /**
@@ -125,7 +138,34 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate([
+            'name' => 'required|min:3|max:255',
+            'slug' => 'required|unique:doctors,slug,'.$id,
+            'designation' => 'required|min:3|max:255',
+            'experience' => 'required|min:3|max:255',
+            'qualification' => 'required|min:1',
+            'speciality' => 'required|min:1',
+        ]);
+
+        $data = $request->except(['_token', '_method']);
+
+        if(isset($data['qualification']))
+        {
+            $qualification = $data['qualification'];
+            unset($data['qualification']);
+            $data['qualification'] = implode(',', $qualification);
+        }
+
+        if(isset($data['speciality']))
+        {
+            $speciality = $data['speciality'];
+            unset($data['speciality']);
+            $data['speciality'] = implode(',', $speciality);
+        }
+
+        Doctor::whereId($id)->update($data);
+
+        return redirect()->route('doctor.index');
     }
 
     /**

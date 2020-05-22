@@ -131,10 +131,13 @@
                                 <a href="#"><i class="fa fa-hospital-o fa-fw"></i> Manage Hospitals<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="#">Add</a>
+                                        <a href="{{ route('hospital.create') }}">Add</a>
                                     </li>
                                     <li>
-                                        <a href="#">List</a>
+                                        <a href="{{ route('hospital.index') }}">List</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('hospital.trash') }}">Trash</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -143,10 +146,10 @@
                                 <a href="#"><i class="fa fa-stethoscope fa-fw"></i> Manage Treatments<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="#">Add</a>
+                                        <a href="{{ route('treatment.create') }}">Add</a>
                                     </li>
                                     <li>
-                                        <a href="#">List</a>
+                                        <a href="{{ route('treatment.index') }}">List</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -155,10 +158,10 @@
                                 <a href="#"><i class="fa fa-comment fa-fw"></i> Manage Testimonials<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="#">Add</a>
+                                        <a href="{{ route('testimonial.create') }}">Add</a>
                                     </li>
                                     <li>
-                                        <a href="#">List</a>
+                                        <a href="{{ route('testimonial.index') }}">List</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

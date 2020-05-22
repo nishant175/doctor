@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">DOCTORS</h1>
+        <h1 class="page-header">testimonialS</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -23,7 +23,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @php $routeName = \Request::route()->getName(); @endphp
-                    List of {{ ($routeName == 'doctor.index') ? 'Active' : 'Trashed' }} doctors
+                    List of {{ ($routeName == 'testimonial.index') ? 'Active' : 'Trashed' }} testimonials
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -32,38 +32,32 @@
                             <thead>
                                 <tr>
                                     <th>S.N.</th>
-                                    <th>Doctor Name</th>
-                                    <th>Designation</th>
-                                    <th>Experience</th>
-                                    <th>Qualification</th>
-                                    <th>Hosplital</th>
+                                    <th>Title</th>
+                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @php $i=1; @endphp
-                            @forelse($doctors as $doctor)
+                            @forelse($testimonials as $testimonial)
                                 <tr class="odd gradeX">
                                     <td>{{ $i }}</td>
-                                    <td>{{ $doctor->name }}</td>
-                                    <td>{{ $doctor->designation }}</td>
-                                    <td class="center">{{ $doctor->experience }}</td>
-                                    <td class="center">{{ $doctor->qualification }}</td>
-                                    <td class="center">{{ $doctor->hospital->name }}</td>
+                                    <td>{{ $testimonial->title }}</td>
+                                    <td><img width="75px" src="{{ url('images/'.$testimonial->image) }}"></td>
                                     <td class="center">
-                                    @if($routeName == 'doctor.index')
-                                        <a href="{{ route('doctor.show', ['doctor' => $doctor->id]) }}" target="_blank"><i class="fa fa-eye"></i></a> &nbsp;
-                                        <a href="{{ route('doctor.edit' , ['doctor' => $doctor->id]) }}"><i class="fa fa-edit"></i></a> &nbsp;
-                                        <a href="" onclick="deleteDoctor( {{ $doctor->id }} )"><i class="fa fa-trash"></i></a>
-                                        <form action="{{ route('doctor.destroy' , ['doctor' => $doctor->id]) }}" method="POST" id="delete-form{{ $doctor->id }}" style="display: none;">
+                                    @if($routeName == 'testimonial.index')
+                                        <a href="{{ route('testimonial.show', ['testimonial' => $testimonial->id]) }}" target="_blank"><i class="fa fa-eye"></i></a> &nbsp;
+                                        <a href="{{ route('testimonial.edit' , ['testimonial' => $testimonial->id]) }}"><i class="fa fa-edit"></i></a> &nbsp;
+                                        <a href="" onclick="deletetestimonial( {{ $testimonial->id }} )"><i class="fa fa-trash"></i></a>
+                                        <form action="{{ route('testimonial.destroy' , ['testimonial' => $testimonial->id]) }}" method="POST" id="delete-form{{ $testimonial->id }}" style="display: none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
                                     @else
-                                        <a href="javascript:void(0)" onclick="backToList( {{ $doctor->id }} )"><i class="fa fa-recycle"></i></a>
-                                        <form action="{{ route('doctor.trash-back') }}" method="POST" id="trash-form{{ $doctor->id }}" style="display: none;">
+                                        <a href="javascript:void(0)" onclick="backToList( {{ $testimonial->id }} )"><i class="fa fa-recycle"></i></a>
+                                        <form action="{{ route('testimonial.trash-back') }}" method="POST" id="trash-form{{ $testimonial->id }}" style="display: none;">
                                             @csrf
-                                            <input type="hidden" name="id" value="{{ $doctor->id }}">
+                                            <input type="hidden" name="id" value="{{ $testimonial->id }}">
                                         </form>
                                     @endif
                                     </td>
@@ -96,7 +90,7 @@
             });
         });
 
-        function deleteDoctor(id)
+        function deletetestimonial(id)
         {
             event.preventDefault();
             var x = confirm('Are you sure you wants to delete?');
