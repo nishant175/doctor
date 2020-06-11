@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">{{ (Route::currentRouteName() == 'hospital.create') ? 'ADD' : 'EDIT' }} HOSPITAL</h1>
+        <h1 class="page-header">{{ (Route::currentRouteName() == 'news.create') ? 'ADD' : 'EDIT' }} News</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -39,19 +39,19 @@
                             <form role="form" action="{{ (Route::currentRouteName() == 'news.create') ? route('news.store') : route('news.update', ['news' => isset($news->id)])  }}" method="post">
                                 @csrf
 
-                                @if(Route::currentRouteName() == 'hospital.edit')
+                                @if(Route::currentRouteName() == 'news.edit')
                                 <input type="hidden" name="_method" value="PUT">
                                 @endif
                                 <div class="form-group">
                                     <label>Title</label>
-                                    <input class="form-control" name="title" placeholder="Enter the title" value="{{ isset($news->title) ? $hospital->title : old('title') }}">
+                                    <input class="form-control" name="title" placeholder="Enter the title" value="{{ isset($news->title) ? $news->title : old('title') }}">
                                     @error('name')
                                         <label class="error">{{ $message }}</label>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                 <label>Description</label>
-                                <textarea name="description" class="form-control" id="myeditor" rows="3">{{ (old('description') != null) ? old('description') : @$hospital->description }}</textarea>
+                                <textarea name="description" class="form-control" id="myeditor" rows="3">{{ (old('description') != null) ? old('description') : @$news->description }}</textarea>
                             </div>
                         </div>
                         <!-- /.col-lg-6 (nested) -->

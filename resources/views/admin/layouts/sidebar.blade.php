@@ -174,10 +174,10 @@
                                 <a href="#"><i class="fa fa-newspaper-o fa-fw"></i> Manage News<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="#">Add</a>
+                                        <a href="{{ route('news.create') }}">Add</a>
                                     </li>
                                     <li>
-                                        <a href="#">List</a>
+                                        <a href="{{ route('news.index') }}">List</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
