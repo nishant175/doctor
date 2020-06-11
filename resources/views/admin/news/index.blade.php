@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">treatments</h1>
+        <h1 class="page-header">hospitalS</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -23,7 +23,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @php $routeName = \Request::route()->getName(); @endphp
-                    List of {{ ($routeName == 'treatment.index') ? 'Active' : 'Trashed' }} treatments
+                    List of {{ ($routeName == 'hospital.index') ? 'Active' : 'Trashed' }} hospitals
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -32,36 +32,32 @@
                             <thead>
                                 <tr>
                                     <th>S.N.</th>
-                                    <th>Treatment Title</th>
-                                    <th>Introduction</th>
-                                    <!--<th>Hospital</th>
-                                    <th>Doctor</th>-->
+                                    <th>hospital Name</th>
+                                    <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @php $i=1; @endphp
-                            @forelse($treatments as $treatment)
+                            @forelse($hospitals as $hospital)
                                 <tr class="odd gradeX">
                                     <td>{{ $i }}</td>
-                                    <td>{{ $treatment->title }}</td>
-                                    <td>{{ $treatment->introduction }}</td>
-                                    <!--<td>{!! $treatment->hospital->name !!}</td>
-                                    <td>{!! $treatment->doctor->name !!}</td>-->
+                                    <td>{{ $hospital->name }}</td>
+                                    <td>{!! $hospital->description !!}</td>
                                     <td class="center">
-                                    @if($routeName == 'treatment.index')
-                                        <a href="{{ route('treatment.show', ['treatment' => $treatment->id]) }}" target="_blank"><i class="fa fa-eye"></i></a> &nbsp;
-                                        <a href="{{ route('treatment.edit' , ['treatment' => $treatment->id]) }}"><i class="fa fa-edit"></i></a> &nbsp;
-                                        <a href="" onclick="deletetreatment( {{ $treatment->id }} )"><i class="fa fa-trash"></i></a>
-                                        <form action="{{ route('treatment.destroy' , ['treatment' => $treatment->id]) }}" method="POST" id="delete-form{{ $treatment->id }}" style="display: none;">
+                                    @if($routeName == 'hospital.index')
+                                        <a href="{{ route('hospital.show', ['hospital' => $hospital->id]) }}" target="_blank"><i class="fa fa-eye"></i></a> &nbsp;
+                                        <a href="{{ route('hospital.edit' , ['hospital' => $hospital->id]) }}"><i class="fa fa-edit"></i></a> &nbsp;
+                                        <a href="" onclick="deletehospital( {{ $hospital->id }} )"><i class="fa fa-trash"></i></a>
+                                        <form action="{{ route('hospital.destroy' , ['hospital' => $hospital->id]) }}" method="POST" id="delete-form{{ $hospital->id }}" style="display: none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
                                     @else
-                                        <a href="javascript:void(0)" onclick="backToList( {{ $treatment->id }} )"><i class="fa fa-recycle"></i></a>
-                                        <form action="{{ route('treatment.trash-back') }}" method="POST" id="trash-form{{ $treatment->id }}" style="display: none;">
+                                        <a href="javascript:void(0)" onclick="backToList( {{ $hospital->id }} )"><i class="fa fa-recycle"></i></a>
+                                        <form action="{{ route('hospital.trash-back') }}" method="POST" id="trash-form{{ $hospital->id }}" style="display: none;">
                                             @csrf
-                                            <input type="hidden" name="id" value="{{ $treatment->id }}">
+                                            <input type="hidden" name="id" value="{{ $hospital->id }}">
                                         </form>
                                     @endif
                                     </td>
@@ -94,7 +90,7 @@
             });
         });
 
-        function deletetreatment(id)
+        function deletehospital(id)
         {
             event.preventDefault();
             var x = confirm('Are you sure you wants to delete?');

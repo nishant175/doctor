@@ -71,13 +71,6 @@ class TreatmentController extends Controller
         $validateData = $request->validate([
             'title' => 'required|min:3|max:150',
             //'slug' => 'required|unique:doctors',
-            'description' => 'required|min:3|max:500',
-            'patient_name' => 'required|min:3|max:100',
-            'patient_age' => 'required|min:1|max:3',
-            'patient_mobile' => 'required|min:10|max:10',
-            'patient_city' => 'required|min:3|max:50',
-            'patient_state' => 'required|min:2|max:50',
-            'patient_pincode' => 'required|min:6|max:6',
         ]);
 
         $data = $request->all();
@@ -123,13 +116,6 @@ class TreatmentController extends Controller
         $validateData = $request->validate([
             'title' => 'required|min:3|max:150',
             //'slug' => 'required|unique:doctors',
-            'description' => 'required|min:3|max:500',
-            'patient_name' => 'required|min:3|max:100',
-            'patient_age' => 'required|min:1|max:3',
-            'patient_mobile' => 'required|min:10|max:10',
-            'patient_city' => 'required|min:3|max:50',
-            'patient_state' => 'required|min:2|max:50',
-            'patient_pincode' => 'required|min:6|max:6',
         ]);
 
         $data = $request->except(['_token', '_method']);

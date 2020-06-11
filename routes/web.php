@@ -39,4 +39,8 @@ Route::middleware('auth')->prefix('admin')->group(function(){
 
 
 	Route::resource('testimonial', 'TestimonialController');
+
+	Route::get('importExportView/{table}', 'CsvExcelController/{table}@importExportView');
+	Route::get('export/{table}', 'CsvExcelController@export')->name('export');
+	Route::post('import/{table}', 'CsvExcelController@import')->name('import');
 });

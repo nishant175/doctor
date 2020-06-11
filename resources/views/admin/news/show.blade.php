@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">treatment Info</h1>
+        <h1 class="page-header">hospital Info</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -22,24 +22,30 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Below are the treatment details
+                    Below are the hospital details
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <table class="table table-bordered">
                         <tr>
-                            <th>Treatment Title</th>
-                            <td>{{ $treatment->title }}</td>
-                            <th>Introduction</th>
-                            <td>{!! $treatment->introduction !!}</td>
+                            <th>Name</th>
+                            <td>{{ $hospital->name }}</td>
+                            <th>Description</th>
+                            <td>{!! $hospital->description !!}</td>
                         </tr><tr>
-                            <th>Cost</th>
-                            <td>{!! $treatment->cost !!}</td>
-                            <th>specialization</th>
-                            <td>{!! $treatment->specialization !!}</td>
+                            <th>Team Specialities</th>
+                            <td>{!! $hospital->team_specialities !!}</td>
+                            <th>Infrastructure</th>
+                            <td>{!! $hospital->infrastructure !!}</td>
+                            
+                            
                         </tr><tr>
-                            <th>faqs</th>
-                            <td>{!! $treatment->faqs !!}</td>
+                            <th>Address</th>
+                            <td>{!! $hospital->address !!}</td>
+                            <th>Facilities</th>
+                            <td>{!! $hospital->facilities !!}</td>
+                            
+                            
                         </tr>
                     </table>
                 </div>

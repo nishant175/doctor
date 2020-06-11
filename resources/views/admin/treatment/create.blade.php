@@ -44,6 +44,8 @@
                                 @if(Route::currentRouteName() == 'treatment.edit')
                                 <input type="hidden" name="_method" value="PUT">
                                 @endif
+                                <input type="hidden" name="hospital_id" value="1">
+                                <input type="hidden" name="doctor_id" value="1">
                                 <div class="form-group">
                                     <label>Treatement Title</label>
                                     <input class="form-control" name="title" placeholder="Enter treatment title" value="{{ isset($treatment->title) ? $treatment->title : old('title') }}">
@@ -51,7 +53,7 @@
                                         <label class="error">{{ $message }}</label>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label>Hospital</label>
                                     <select class="form-control" name="hospital_id">
                                     @forelse($hospitals as $hospital)
@@ -63,8 +65,8 @@
                                     @error('hospital_id')
                                         <label class="error">{{ $message }}</label>
                                     @enderror
-                                </div>
-                                <div class="form-group">
+                                </div>-->
+                                <!--<div class="form-group">
                                     <label>Doctor</label>
                                     <select class="form-control" name="doctor_id">
                                     @forelse($doctors as $doctor)
@@ -76,62 +78,33 @@
                                     @error('doctor_id')
                                         <label class="error">{{ $message }}</label>
                                     @enderror
-                                </div>
+                                </div>-->
                             <div class="form-group">
-                                <label>Description</label>
+                                <label>Introduction</label>
                                 <!-- creating a text area for my editor in the form -->
-                                <textarea name="description" class="form-control" id="myeditor1" name="description">{{ (old('description') != null) ? old('description') : @$treatment->description }}</textarea>
+                                <textarea class="form-control" id="" name="introduction">{{ (old('introduction') != null) ? old('introduction') : @$treatment->introduction }}</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Cost</label>
+                                <!-- creating a text area for my editor in the form -->
+                                <textarea class="form-control" id="myeditor1" name="cost">{{ (old('cost') != null) ? old('cost') : @$treatment->cost }}</textarea>
                             </div>
                             <div class="form-group">
-                                <label>Patient Name</label>
-                                <input class="form-control" name="patient_name" placeholder="Enter treatment patient_name" value="{{ isset($treatment->patient_name) ? $treatment->patient_name : old('patient_name') }}">
-                                @error('patient_name')
-                                    <label class="error">{{ $message }}</label>
-                                @enderror
+                                <label>Specialization</label>
+                                <!-- creating a text area for my editor in the form -->
+                                <textarea class="form-control" id="myeditor2" name="cost">{{ (old('specialization') != null) ? old('specialization') : @$treatment->specialization }}</textarea>
                             </div>
                             <div class="form-group">
-                                <label>Patient Age</label>
-                                <input class="form-control" name="patient_age" placeholder="Enter treatment patient_age" value="{{ isset($treatment->patient_age) ? $treatment->patient_age : old('patient_age') }}">
-                                @error('patient_age')
-                                    <label class="error">{{ $message }}</label>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Patient Mobile</label>
-                                <input class="form-control" name="patient_mobile" placeholder="Enter treatment patient_mobile" value="{{ isset($treatment->patient_mobile) ? $treatment->patient_mobile : old('patient_mobile') }}">
-                                @error('patient_mobile')
-                                    <label class="error">{{ $message }}</label>
-                                @enderror
+                                <label>Faqs</label>
+                                <!-- creating a text area for my editor in the form -->
+                                <textarea class="form-control" id="myeditor2" name="faqs">{{ (old('faqs') != null) ? old('faqs') : @$treatment->faqs }}</textarea>
                             </div>
                         </div>
                         <!-- /.col-lg-6 (nested) -->
                         <div class="col-lg-6">
                             
-                            <div class="form-group">
-                                <label>Patient City</label>
-                                <input class="form-control" name="patient_city" placeholder="Enter treatment patient_city" value="{{ isset($treatment->patient_city) ? $treatment->patient_city : old('patient_city') }}">
-                                @error('patient_city')
-                                    <label class="error">{{ $message }}</label>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Patient State</label>
-                                <input class="form-control" name="patient_state" placeholder="Enter treatment patient_state" value="{{ isset($treatment->patient_state) ? $treatment->patient_state : old('patient_state') }}">
-                                @error('patient_state')
-                                    <label class="error">{{ $message }}</label>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Patient Pincode</label>
-                                <input class="form-control" name="patient_pincode" placeholder="Enter treatment patient_pincode" value="{{ isset($treatment->patient_pincode) ? $treatment->patient_pincode : old('patient_pincode') }}">
-                                @error('patient_pincode')
-                                    <label class="error">{{ $message }}</label>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Patient Address</label>
-                                <textarea name="patient_address" class="form-control" id="myeditor3" rows="3">{{ (old('patient_address') != null) ? old('patient_address') : @$treatment->patient_address }}</textarea>
-                            </div>
+                            
                         </div>
                         <!-- /.col-lg-6 (nested) -->
                         <div class="col-lg-12">

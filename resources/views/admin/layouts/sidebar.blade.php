@@ -167,15 +167,7 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-rss fa-fw"></i> Manage Blogs<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="#">Add</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">List</a>
-                                    </li>
-                                </ul>
+                                <a href="{{ url('blog_admin') }}"><i class="fa fa-rss fa-fw"></i> Manage Blogs<span class="fa arrow"></span></a>
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
