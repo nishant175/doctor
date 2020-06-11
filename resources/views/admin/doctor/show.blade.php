@@ -30,33 +30,38 @@
                         <tr>
                             <th>Name</th>
                             <td>{{ $doctor->name }}</td>
+                            <th>Hospital</th>
+                            <td>{{ $doctor->hospital->name }}</td>
+                        </tr><tr>
                             <th>Designation</th>
                             <td>{{ $doctor->designation }}</td>
+                            <th>Category</th>
+                            <td>{{ $doctor->category->name }}</td>
+                            
+                            
                         </tr><tr>
                             <th>Experience</th>
                             <td>{{ $doctor->experience }}</td>
                             <th>Qualification</th>
                             <td>{{ $doctor->qualification }}</td>
+                            
+                            
                         </tr><tr>
                             <th>Speciality</th>
                             <td>{{ $doctor->speciality }}</td>
-                            <th>Category</th>
-                            <td>{{ $doctor->category }}</td>
-                        </tr><tr>
                             <th>About Doctor</th>
                             <td>{!! $doctor->about !!}</td>
-                            <th>Specialization</th>
-                            <td>{!! $doctor->specialization !!}</td>
+                            
                         </tr><tr>
                             <th>List Of Awards</th>
                             <td>{!! $doctor->list_of_awards !!}</td>
                             <th>Work Experience</th>
                             <td>{!! $doctor->work_experience !!}</td>
                         </tr><tr>
+                            <th>Specialization</th>
+                            <td>{!! $doctor->specialization !!}</td>
                             <th>Education Training</th>
                             <td>{!! $doctor->education_training !!}</td>
-                            <th>Slug</th>
-                            <td>{{ $doctor->slug }}</td>
                         </tr>
                     </table>
                 </div>

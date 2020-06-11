@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+//use App\Http\Controllers\Auth\LoginController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Auth\LoginController@showLoginForm');
 
 Auth::routes();
 
@@ -24,8 +24,25 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware('auth')->prefix('admin')->group(function(){
 
 	Route::get('/doctor/trash', 'DoctorController@trash')->name('doctor.trash');
+	Route::post('doctor/trash-back', 'DoctorController@backToList')->name('doctor.trash-back');
+	Route::resource('doctor', 'DoctorController');
 
-	Route::resource('doctor', 'DoctorController')->names([
-	    //'index' => 'doctor.list'
-	]);
+
+	Route::get('/hospital/trash', 'HospitalController@trash')->name('hospital.trash');
+	Route::post('hospital/trash-back', 'HospitalController@backToList')->name('hospital.trash-back');
+	Route::resource('hospital', 'HospitalController');
+
+
+	Route::get('/treatment/trash', 'TreatmentController@trash')->name('treatment.trash');
+	Route::post('treatment/trash-back', 'TreatmentController@backToList')->name('treatment.trash-back');
+	Route::resource('treatment', 'TreatmentController');
+
+
+	Route::resource('testimonial', 'TestimonialController');
+
+	Route::resource('news', 'NewsController');
+
+	Route::get('importExportView/{table}', 'CsvExcelController/{table}@importExportView');
+	Route::get('export/{table}', 'CsvExcelController@export')->name('export');
+	Route::post('import/{table}', 'CsvExcelController@import')->name('import');
 });

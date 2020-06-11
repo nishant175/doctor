@@ -53,14 +53,18 @@
                                     <td class="center">
                                     @if($routeName == 'doctor.index')
                                         <a href="{{ route('doctor.show', ['doctor' => $doctor->id]) }}" target="_blank"><i class="fa fa-eye"></i></a> &nbsp;
-                                        <a href="#"><i class="fa fa-edit"></i></a> &nbsp;
+                                        <a href="{{ route('doctor.edit' , ['doctor' => $doctor->id]) }}"><i class="fa fa-edit"></i></a> &nbsp;
                                         <a href="" onclick="deleteDoctor( {{ $doctor->id }} )"><i class="fa fa-trash"></i></a>
                                         <form action="{{ route('doctor.destroy' , ['doctor' => $doctor->id]) }}" method="POST" id="delete-form{{ $doctor->id }}" style="display: none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
                                     @else
-                                        <a href="#"><i class="fa fa-recycle"></i></a>
+                                        <a href="javascript:void(0)" onclick="backToList( {{ $doctor->id }} )"><i class="fa fa-recycle"></i></a>
+                                        <form action="{{ route('doctor.trash-back') }}" method="POST" id="trash-form{{ $doctor->id }}" style="display: none;">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $doctor->id }}">
+                                        </form>
                                     @endif
                                     </td>
                                 </tr>
@@ -99,6 +103,20 @@
             if(x)
             {
                 document.getElementById('delete-form'+id).submit();
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        function backToList(id)
+        {
+            event.preventDefault();
+            var x = confirm('Are you sure?');
+            if(x)
+            {
+                document.getElementById('trash-form'+id).submit();
             }
             else
             {

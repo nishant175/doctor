@@ -15,4 +15,9 @@ class Doctor extends Model
    	{
    		return $this->belongsTo('App\Hospital');
    	}
+
+   	public function category()
+   	{
+   		return $this->belongsTo('App\Category');
+   	}
 }

@@ -9,6 +9,8 @@ class Hospital extends Model
 {
    	use SoftDeletes;
 
+   	protected $guarded = [];
+
    	public function hospital()
    	{
    		return $this->hasMany('App\Doctors');
