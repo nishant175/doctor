@@ -44,9 +44,10 @@
                     * Please fill all the required details.
                 </div>
                 <div class="panel-body">
+                <form role="form" action="{{ (Route::currentRouteName() == 'doctor.create') ? route('doctor.store') : route('doctor.update', ['doctor' => $doctor->id])  }}" method="post">
                     <div class="row">
                         <div class="col-lg-6">
-                            <form role="form" action="{{ (Route::currentRouteName() == 'doctor.create') ? route('doctor.store') : route('doctor.update', ['doctor' => $doctor->id])  }}" method="post">
+                            
                                 @csrf
 
                                 @if(Route::currentRouteName() == 'doctor.edit')
@@ -147,8 +148,39 @@
                                 <textarea name="specialization" class="form-control" id="myeditor1" name="specialization">{{ (old('specialization') != null) ? old('specialization') : @$doctor->specialization }}</textarea>
                             </div>
                         </div>
+
                         <!-- /.col-lg-6 (nested) -->
                         <div class="col-lg-6">
+
+                        <div class="form-group">
+                                <label>States</label>
+                                <select required id="state" class="form-control" name="state">
+                                <option value="">-- Please select --</option>
+                                @foreach($states as $state)
+                                    <option @if($state->id == @$doctor->state || old('state') == $state->id) selected @endif value="{{ $state->id }}">{{ $state->name }}</option>
+                                @endforeach
+                                </select>
+                                </div>
+
+                                <div class="form-group">
+                                <label>Cities</label>
+                                <div id="cities">
+                                <select required  class="form-control" name="city">
+                                <option value="">-- Please select --</option>
+                                @forelse($cities as $city)
+                                    <option @if($city->id == @$doctor->city || old('city') == $city->id) selected @endif value="{{ $city->id }}">{{ $city->name }}</option>
+                                @empty
+
+                                @endforelse  
+                                </select>
+                                </div>
+                                </div> 
+
+                                <div class="form-group">
+                                <label>Location</label>
+                                <input type="text" name="location" value="{{ isset($doctor->location) ? $doctor->location : old('location') }}" class="form-control">
+                                </div>
+
                             <div class="form-group">
                                 <label>List Of Awards</label>
                                 <textarea name="list_of_awards" id="myeditor2" class="form-control" rows="3">{{ (old('list_of_awards') != null) ? old('list_of_awards') : @$doctor->list_of_awards }}</textarea>
@@ -162,14 +194,27 @@
                                 <textarea name="education_training" class="form-control" id="myeditor4" rows="3">{{ (old('education_training') != null) ? old('education_training') : @$doctor->education_training }}</textarea>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                                <label>Inner Image </label><br>
+                                <button type="button" id="image-upload1" class="btn btn-info" data-toggle="modal" data-target="#myModal">Upload / Replace Image</button>
+                                <input id="hidden-image-inner" type="hidden" name="image">
+                                <div id="hidden-inner" style="padding:25px">
+                                @if(@$doctor->image!="")
+                                <img class="img-thumbnail" style="width:150px" src="{{ asset(@$hospital->image) }}">
+                                @endif
+                                </div>
+                            </div>
+
                         <!-- /.col-lg-6 (nested) -->
                         <div class="col-lg-12">
                             <button type="submit" class="btn btn-warning">Submit</button>
                             <button type="reset" class="btn btn-default">Reset Button</button>
                         </div>
-                    </form>
+                    
                     </div>
                     <!-- /.row (nested) -->
+                    </form>
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -188,6 +233,76 @@
         CKEDITOR.replace('myeditor3');
         CKEDITOR.replace('myeditor4');
     </script>
+
+    <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center">Please Select An Image To Upload</h4>
+        </div>
+        <input type="hidden" id="image_type" value="">
+        <div class="modal-body" id="image-content">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" id="close-model" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <script>
+
+$('#image-upload').on('click', function(){
+    $('#image_type').val('featured');
+    $.ajax({
+        type: "get",
+        url: "{{ route('image-upload.all') }}",
+        data: '',
+        headers: {
+        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        },
+        success: function(data){
+            $("#image-content").html(data);
+        }
+    });  
+});
+
+$('#image-upload1').on('click', function(){
+    $('#image_type').val('inner');
+    $.ajax({
+        type: "get",
+        url: "{{ route('image-upload.all') }}",
+        data: '',
+        headers: {
+        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        },
+        success: function(data){
+            $("#image-content").html(data);
+        }
+    });  
+});
+
+$('#state').on('change', function(){
+    var datastring = $(this).val();
+    $.ajax({
+        url: "{{ route('city-list') }}",
+        type: "post",
+        data: {stateId: datastring},
+        headers: {
+        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        },
+        success: function(data){
+            $("#cities").html(data);
+        }
+    });
+});
+
+</script>
 @endpush
 
 @endsection

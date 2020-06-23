@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Doctor;
 use App\Hospital;
 use App\Category;
+use App\State;
+use App\City;
 
 class HospitalController extends Controller
 {
@@ -26,8 +28,10 @@ class HospitalController extends Controller
 
         //\Log::info($queries);
 
+        $states = State::get();
+
         $hospitals = Hospital::get();
-        return view('admin.hospital.index', compact('hospitals'));
+        return view('admin.hospital.index', compact('hospitals', 'states'));
     }
 
     /**
@@ -55,7 +59,9 @@ class HospitalController extends Controller
      */
     public function create()
     {
-        return view('admin.hospital.create');
+        $states = State::get();
+        $cities = [];
+        return view('admin.hospital.create', compact('states', 'cities'));
     }
 
     /**
@@ -68,14 +74,13 @@ class HospitalController extends Controller
     {
         $validateData = $request->validate([
             'name' => 'required|min:3|max:255',
-            //'slug' => 'required|unique:doctors',
+            'slug' => 'required|unique:hospitals',
             'description' => 'required|min:3|max:255',
             'address' => 'required|min:3|max:255',
             'facilities' => 'required|min:1',
         ]);
 
         $data = $request->all();
-
         Hospital::create($data);
 
         return redirect()->route('hospital.index');
@@ -100,7 +105,9 @@ class HospitalController extends Controller
      */
     public function edit(Hospital $hospital)
     {
-        return view('admin.hospital.create', compact('hospital'));
+        $states = State::get();
+        $cities = City::where('state_id', $hospital->state)->get();
+        return view('admin.hospital.create', compact('hospital', 'states', 'cities'));
     }
 
     /**

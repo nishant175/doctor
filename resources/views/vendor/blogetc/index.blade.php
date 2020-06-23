@@ -1,4 +1,5 @@
-@extends("layouts.app",['title'=>$title])
+{{--@extends("layouts.app",['title'=>$title])--}}
+@extends("layouts.app",['title'=>Denesa Health])
 @section("content")
 
     {{--https://webdevetc.com/laravel/packages/blogetc-blog-system-for-your-laravel-app/help-documentation/laravel-blog-package-blogetc#guide_to_views--}}

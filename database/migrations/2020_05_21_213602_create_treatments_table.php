@@ -17,19 +17,15 @@ class CreateTreatmentsTable extends Migration
             $table->id();
             $table->foreignId('hospital_id')
               ->constrained()
-              ->onDelete('cascade');
+              ->onDelete('cascade')->default(0);
             $table->foreignId('doctor_id')
               ->constrained()
-              ->onDelete('cascade');
+              ->onDelete('cascade')->default(0);
             $table->string('title');
-            $table->text('description');
-            $table->string('patient_name');
-            $table->string('patient_age', 5);
-            $table->string('patient_mobile', 10);
-            $table->string('patient_city', 50);
-            $table->string('patient_state', 50);
-            $table->string('patient_pincode', 10);
-            $table->text('patient_address')->nullable();
+            $table->text('introduction');
+            $table->text('cost');
+            $table->text('specialization');
+            $table->text('faqs');
             $table->softDeletes();
             $table->timestamps();
         });

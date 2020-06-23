@@ -182,6 +182,23 @@
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-newspaper-o fa-fw"></i> Manage Categories<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{{ route('category.create') }}">Add</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('category.index') }}">List</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="{{ route('image-upload.view') }}"><i class="fa fa-picture-o fa-fw"></i> Image Upload Master</a> <!-- /.nav-second-level -->
+                            </li>
                             
                         </ul>
                     </div>

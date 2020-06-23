@@ -33,6 +33,22 @@
             .error{color:#a94442;}
         </style>
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+        @yield('script')
+
+
+        <style>
+        
+        .modal-header {
+            border-bottom: 0px;
+        }
+
+        .modal-footer {
+            border-top: 0px;
+        }
+        </style>
+
         @stack('head')
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

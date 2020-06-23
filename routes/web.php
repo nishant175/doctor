@@ -45,4 +45,14 @@ Route::middleware('auth')->prefix('admin')->group(function(){
 	Route::get('importExportView/{table}', 'CsvExcelController/{table}@importExportView');
 	Route::get('export/{table}', 'CsvExcelController@export')->name('export');
 	Route::post('import/{table}', 'CsvExcelController@import')->name('import');
+
+	Route::get('image-upload-view', 'ImageUploadController@viewImageUpload')->name('image-upload.view');
+
+	Route::get('get-all', 'ImageUploadController@viewAll')->name('image-upload.all');
+
+	Route::post('image-upload', 'ImageUploadController@imageUpload')->name('image-upload.upload');
+
+	Route::post('city-list', 'CityController@index')->name('city-list');
+
+	Route::resource('category', 'CategoryController');
 });

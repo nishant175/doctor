@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Doctor;
 use App\Hospital;
 use App\Category;
+use App\State;
+use App\City;
 use DB;
 use Cache;
 use Config;
@@ -64,7 +66,9 @@ class DoctorController extends Controller
     {
         $hospitals = Hospital::get();
         $categories = Category::get();
-        return view('admin.doctor.create', compact('hospitals', 'categories'));
+        $states = State::get();
+        $cities = [];
+        return view('admin.doctor.create', compact('hospitals', 'categories', 'states', 'cities'));
     }
 
     /**
@@ -126,7 +130,9 @@ class DoctorController extends Controller
     {
         $hospitals = Hospital::get();
         $categories = Category::get();
-        return view('admin.doctor.create', compact('doctor', 'hospitals', 'categories'));
+        $states = State::get();
+        $cities = City::where('state_id', $hospital->state)->get();
+        return view('admin.doctor.create', compact('doctor', 'hospitals', 'categories', 'states', 'cities'));
     }
 
     /**
